@@ -1,11 +1,13 @@
-//////////////////////////////////////////
-// Fecha: 05/12/2021                    //
-// Creado por Mathias Alejandro Salva   //
-// Legajo 2002180                       //
-// Algoritmo y Estructura de datos      //
-// Curso K1024                          //
-// UTN FRBA                             //
-//////////////////////////////////////////
+////////////////////////////////////////////////////
+// Fecha: 05/12/2021                              //
+// Creado por Mathias Alejandro Salva             //
+// Correo msalva@frba.utn.edu.ar                  //
+// Legajo 2002180                                 //
+// Catedra: Algoritmos y Estructuras de Datos     //
+// Profesor: Ing. Pablo Mendez                    //
+// Curso K1024                                    //
+// UTN FRBA                                       //
+////////////////////////////////////////////////////
 #include <iostream>
 #include <cstdio>
 #include <cstring>
@@ -60,6 +62,10 @@ struct NodoListaDEModelo{
  ********************************************************************************************/
 
 //  Primitivas Lista DE Modelos
+/* Procedimiento listaModeloInsertarSiguiente:
+ * Precondiciones: Requiere una direccion de puntero de una lista DE. de modelos, y un dato de tipo Modelo.
+ * Postcondiciones: Inserta el dato provisto como nodo siguiente al de la direccion del puntero
+ * */
 void listaModeloInsertarSiguiente (NodoListaDEModelo  *&n, Modelo x){
     NodoListaDEModelo *nuevo= new NodoListaDEModelo();
     nuevo -> info = x;
@@ -79,18 +85,31 @@ void listaModeloInsertarSiguiente (NodoListaDEModelo  *&n, Modelo x){
     }
     return;
 }
+/* Funcion listaModeloObtenerSiguiente:
+ * Precondiciones: Requiere un puntero de un nodo de lista DE Modelo.
+ * Postcondiciones: Retorna la direccion de puntero de su nodo siguiente, o NULL de no existir.
+ * */
 NodoListaDEModelo *listaModeloObtenerSiguiente (NodoListaDEModelo *m){
     if (m)
         return m->sgte;
     else
         return NULL;
 }
+/* Funcion buscarIdModelo:
+ * Precondiciones: Requiere un puntero de inicio la lista DE Modelo asi como tambien un
+ * numero entero correspondiente al "ID" o numero de modelo de automovil a buscar.
+ * Postcondiciones: Retorna el puntero al automovil con el ID buscado, o NULL de no existir el mismo en la lista.
+ * */
 NodoListaDEModelo *buscarIdModelo(NodoListaDEModelo *inicio, int id_modelo){
     while (inicio && inicio -> info.id_modelo != id_modelo){
         inicio = inicio -> sgte;
     }
     return inicio;
 }
+/* Funcion ObtenerUltimoModelo:
+ * Precondiciones: Requiere un puntero de lista DE Modelo.
+ * Postcondiciones: Retorna el ultimo nodo de la lista DE Modelo.
+ * */
 NodoListaDEModelo *ObtenerUltimoModelo(NodoListaDEModelo * m){
     if (m){
         while (m->sgte){
@@ -99,8 +118,11 @@ NodoListaDEModelo *ObtenerUltimoModelo(NodoListaDEModelo * m){
     }
     return m;
 }
-void listaModeloInsertarFinal (NodoListaDEModelo  *&n, Modelo x)
-{
+/* Procedimiento listaModeloInsertarFinal:
+ * Precondiciones: Requiere direccion de puntero de una lista DE Modelo y un dato de tipo Modelo.
+ * Postcondiciones: Se inserta el dato provisto al final de la lista indicada.
+ * */
+void listaModeloInsertarFinal (NodoListaDEModelo  *&n, Modelo x){
     NodoListaDEModelo *aux;
 
     if (n){
@@ -112,6 +134,10 @@ void listaModeloInsertarFinal (NodoListaDEModelo  *&n, Modelo x)
     }
     return;
 }
+/* Procedimiento listaAutoparteBorrarLista:
+ * Precondiciones: Requiere una direccion de puntero de una sublista SE de Autoparte.
+ * Postcondiciones: Borra la sublista SE de Autoparte de un nodo de Lista DE Modelo.
+ * */
 void listaAutoparteBorrarLista(NodoListaSEAutoparte *&lista){
     NodoListaSEAutoparte *ant;
     NodoListaSEAutoparte *paux;
@@ -132,6 +158,11 @@ void listaAutoparteBorrarLista(NodoListaSEAutoparte *&lista){
     }
     return;
 }
+/* Procedimiento listaModeloBorrarSiguiente:
+ * Precondiciones: Requiere direccion de puntero de un nodo de lista DE Modelo.
+ * Postcondiciones: El nodo siguiente al indicado en la lista DE Modelo es borrado, asi como tambien
+ * su sublista SE Autoparte correspondiente.
+ * */
 void listaModeloBorrarSiguiente(NodoListaDEModelo *n){
     NodoListaDEModelo *n_borrar = n -> sgte;
     NodoListaDEModelo *sgt_n_borrar;
@@ -149,6 +180,10 @@ void listaModeloBorrarSiguiente(NodoListaDEModelo *n){
 
 
 // Primitivas Lista Autopartes
+/* Procedimiento listaAutoparteInsertarSiguiente:
+ * Precondiciones: Requiere un puntero de un nodo de sublista SE Autoparte y un dato de tipo Autoparte.
+ * Postcondiciones: Se elimina de la lista de modelos el nodo especificado asi como su sublista de autopartes.
+ * */
 void listaAutoparteInsertarSiguiente(NodoListaSEAutoparte *&n, Autoparte a){
     NodoListaSEAutoparte *nueva = new NodoListaSEAutoparte();
     nueva -> info = a;
@@ -163,23 +198,42 @@ void listaAutoparteInsertarSiguiente(NodoListaSEAutoparte *&n, Autoparte a){
 
     return;
 }
+/* Funcion obtenerUltimaAutoparte:
+ * Precondiciones: Requiere un puntero del nodo de una sublista SE Autoparte.
+ * Postcondiciones: Retorna direccion de la ultima autoparte de la sublista.
+ * */
 NodoListaSEAutoparte *obtenerUltimaAutoparte(NodoListaSEAutoparte * a){
     if (a)
         while (a -> sgte)
             a = a -> sgte;
     return a;
 }
+/* Funcion buscarIdAutoparte:
+ * Precondiciones: Requiere un puntero de inicio de una lista SE Autoparte y un entero que corresponda al ID
+ * de una autoparte.
+ * Postcondiciones: Retorna la direccion del nodo cuya ID de autoparte corresponda a la autoparte buscada en la sublista
+ * NULL en caso de existir.
+ * */
 NodoListaSEAutoparte *buscarIdAutoparte(NodoListaSEAutoparte *inicio, int id_autoparte){
     while (inicio && inicio -> info.id_autoparte != id_autoparte){
         inicio = inicio -> sgte;
     }
     return inicio;
 }
+/* Funcion ObtenerModeloConRepuesto:
+ * Precondiciones: Requiere un puntero de lista DE Modelo asi como un entero de ID de autoparte a buscar en la sublista
+ * de la misma.
+ * Postcondiciones: Retorna la direccion del nodo de la lista DE Modelo donde se encuentra el ID de autoparte buscado.
+ * */
 NodoListaDEModelo *ObtenerModeloConRepuesto(NodoListaDEModelo *lista, int id_autoparte){
     while (lista && buscarIdAutoparte(lista -> listaAutopartes, id_autoparte) == NULL)
         lista = lista->sgte;
     return lista;
 }
+/* Procedimiento listaAutoparteInsertarAlFinal:
+ * Precondiciones: Requiere una direccion de puntero de una lista SE Autoparte y un dato de tipo Autoparte.
+ * Postcondiciones: Inserta al final de la lista un nodo del dato provisto.
+ * */
 void listaAutoparteInsertarAlFinal(NodoListaSEAutoparte *&lista, Autoparte a){
     NodoListaSEAutoparte *aux;
     aux = obtenerUltimaAutoparte(lista);
@@ -189,6 +243,10 @@ void listaAutoparteInsertarAlFinal(NodoListaSEAutoparte *&lista, Autoparte a){
         listaAutoparteInsertarSiguiente(lista, a);
 
 }
+/* Function listaAutoparteObtenerSiguiente:
+ * Precondiciones: Requiere un puntero de un nodo de lista SE Autoparte.
+ * Postcondiciones: Retorna el nodo siguiente al nodo provisto.
+ * */
 NodoListaSEAutoparte *listaAutoparteObtenerSiguiente(NodoListaSEAutoparte *a){
     if (a)
         return a->sgte;
@@ -231,6 +289,7 @@ void cargarModelo(NodoListaDEModelo *&lModelos){
  * */
 void cargarAutoparte(NodoListaDEModelo *&lPartes){
     NodoListaDEModelo *automovil;
+    bool id_valida = true;
     int modelo_automovil;
     cout << "Ingrese numero de modelo del automovil de la autoparte: " << endl;
     cin >> modelo_automovil;
@@ -240,16 +299,21 @@ void cargarAutoparte(NodoListaDEModelo *&lPartes){
         cout << "*** Ingrese los siguientes datos de la autoparte ***" << endl;
         cout << "Numero de identificacion:" << endl;
         cin >> nueva_autoparte.id_autoparte;
-        cout << "Descripcion:" << endl;
-        fflush(stdin);
-        fgets(nueva_autoparte.descripcion, 100, stdin);
-        cout << "Precio (solo numeros):" << endl;
-        cin >> nueva_autoparte.precio;
-        cout << "Stock:" << endl;
-        cin >> nueva_autoparte.stock;
-        nueva_autoparte.nro_modelo_vehiculo = automovil -> info.id_modelo;
-        listaAutoparteInsertarAlFinal(automovil->listaAutopartes, nueva_autoparte);
-        cout << "Se ha agregado la autoparte ID #" << nueva_autoparte.id_autoparte << " con exito!" << endl;
+        if (!ObtenerModeloConRepuesto(lPartes, nueva_autoparte.id_autoparte)){
+            cout << "Descripcion:" << endl;
+            fflush(stdin);
+            fgets(nueva_autoparte.descripcion, 100, stdin);
+            cout << "Precio (solo numeros):" << endl;
+            cin >> nueva_autoparte.precio;
+            cout << "Stock:" << endl;
+            cin >> nueva_autoparte.stock;
+            nueva_autoparte.nro_modelo_vehiculo = automovil -> info.id_modelo;
+            listaAutoparteInsertarAlFinal(automovil->listaAutopartes, nueva_autoparte);
+            cout << "Se ha agregado la autoparte ID #" << nueva_autoparte.id_autoparte << " con exito!" << endl;
+        }
+        else
+            cout << "ERROR: Ya existe un repuesto con ese ID en el sistema." << endl;
+
     }
 }
 
@@ -445,16 +509,25 @@ int main(){
         switch (opcion) {
             case 1:
                 cargarModelo(listaModelos);
+                cout << "Presione la tecla ENTER para continuar" << endl;
+                fflush(stdin);
+                getchar();
                 break;
             case 2:
                 cargarAutoparte(listaModelos);
+                cout << "Presione la tecla ENTER para continuar" << endl;
+                fflush(stdin);
+                getchar();
                 break;
             case 3:
                 actualizarStock(listaModelos);
+                cout << "Presione la tecla ENTER para continuar" << endl;
+                fflush(stdin);
+                getchar();
                 break;
             case 4:
                 listaModeloMostrar(listaModelos);
-                cout << "Presione una tecla cualquiera para continuar..." << endl;
+                cout << "Presione la tecla ENTER para continuar" << endl;
                 fflush(stdin);
                 getchar();
                 break;
@@ -465,9 +538,13 @@ int main(){
                     cout << "Listado de Autopartes de Modelo #"
                     << buscarIdModelo(listaModelos, modelo_vehiculo) -> info.id_modelo << endl;
                     listaAutoparteMostrar(buscarIdModelo(listaModelos, modelo_vehiculo) -> listaAutopartes);
+
                 }
                 else
                     cout << "No se pudo encontrar el automovil" << endl;
+                    cout << "Presione la tecla ENTER para continuar" << endl;
+                    fflush(stdin);
+                    getchar();
                 break;
             case 6:
                 cout << "Ingrese ID de modelo a borrar: "<< endl;
@@ -476,6 +553,9 @@ int main(){
                 cout << "Modelo #" << modelo_vehiculo << " sera borrado" << endl;
                 eliminarModelo(listaModelos, buscarIdModelo(listaModelos, modelo_vehiculo));
                 cout << "Modelo #" << modelo_vehiculo << " ha sido borrado con exito!" << endl;
+                cout << "Presione la tecla ENTER para continuar" << endl;
+                fflush(stdin);
+                getchar();
                 break;
             case 7:
                 salir = true;
