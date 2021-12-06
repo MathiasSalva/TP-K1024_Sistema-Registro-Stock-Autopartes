@@ -1,6 +1,11 @@
-//
-// Created by mathias.salva on 4/12/2021.
-//
+//////////////////////////////////////////
+// Fecha: 05/12/2021                    //
+// Creado por Mathias Alejandro Salva   //
+// Legajo 2002180                       //
+// Algoritmo y Estructura de datos      //
+// Curso K1024                          //
+// UTN FRBA                             //
+//////////////////////////////////////////
 #include <iostream>
 #include <cstdio>
 #include <cstring>
@@ -12,6 +17,7 @@ using namespace std;
 ////////////////////
 //// Registros ////
 //////////////////
+
 /* Registros de Datos:
  * Modelo: Contiene informacion de los modelos de automoviles.
  * Autoparte: Contiene informacion de las autopartes de cada automovil.
@@ -48,10 +54,10 @@ struct NodoListaDEModelo{
 //// Subprogramas ////
 /////////////////////
 
-/*
- * Primitivas: subprogramas con funciones basicas para las listas DE Modelos y listas SE Autopartes
- */
-
+/********************************************************************************************
+ * Primitivas: subprogramas con funciones basicas para las listas DE de Modelo
+ * y listas SE de Autoparte
+ ********************************************************************************************/
 
 //  Primitivas Lista DE Modelos
 void listaModeloInsertarSiguiente (NodoListaDEModelo  *&n, Modelo x){
@@ -190,10 +196,10 @@ NodoListaSEAutoparte *listaAutoparteObtenerSiguiente(NodoListaSEAutoparte *a){
         return NULL;
 }
 
-/*
+/********************************************************************************************
  * Subprogramas especificos: Aquellos subprogramas utilizados de manera principal
  * para este programa. Constituyen, de manera general, las funciones centrales de este programa.
- */
+ ********************************************************************************************/
 
 /* Procedimiento cargarModelo:
  * Precondiciones: Requiere la direccion de un puntero de lista de modelos de automovil.
@@ -352,12 +358,11 @@ void mainMenu(){
 
 }
 
-/*
- * Subprogramas de manejo de archivos: Se utilizan para administrar los archivos
- * que almacenan la informacion utilizada por este programa, con el objetivo de persistir la misma
- * en el sistema de archivos del computador.
- *
- */
+/********************************************************************************************
+ * Subprogramas de manejo de archivos: Se utilizan para administrar los archivos que almacenan
+ * la informacion utilizada por este programa, con el objetivo de persistir la misma en el
+ * sistema de archivos del computador.
+ ********************************************************************************************/
 
 /* Procedimiento guardarEnArchivo:
  * Precondiciones: Requiere un puntero de lista de Modelo
@@ -366,8 +371,9 @@ void mainMenu(){
  * Por defecto, los nombres de los archivos son los siguientes:
  * >Archivo binario de Modelos: archivo_modelos.data
  * >Archivo binario de Autopartes: archivo_partes.data
+ * Esto se realiza al terminar el programa mediante la opcion "Salir" del menu.
  * */
-    void guardarEnArchivo(NodoListaDEModelo *lModelo){
+void guardarEnArchivo(NodoListaDEModelo *lModelo){
     FILE *f_modelos;
     FILE *f_parts;
     NodoListaDEModelo *auxMod = NULL;
@@ -396,8 +402,12 @@ void mainMenu(){
 }
 
 /* Procedimiento cargarArchivo:
- * Precondiciones: Ninguna
- * Postcondiciones: Muestra al usuario opciones del Menu Principal
+ * Precondiciones: Requiere una direccion de puntero de una lista de Modelo
+ * Postcondiciones: Se realiza la carga de informacion en dicha lista. La informacion esta
+ * compuesta por:
+ * Nodos de lista DE de Modelo
+ * Nodos de las sublistas SE de Autoparte
+ * Esto se realiza al comenzar el programa.
  * */
 void cargarArchivo(NodoListaDEModelo *&lModelo)
 {
@@ -419,7 +429,10 @@ void cargarArchivo(NodoListaDEModelo *&lModelo)
     return;
 }
 
-// Programa principal
+
+/////////////////////////////
+//// Programa Principal ////
+///////////////////////////
 int main(){
     NodoListaDEModelo *listaModelos = NULL;
     cargarArchivo(listaModelos);
